@@ -3,7 +3,7 @@ Klasifikasi Rimpang (Jahe, Kunyit, Lengkuas) menggunakan GLCM + KNN/SVM/Random F
 
 ## Dataset
 Download dan ekstrak zip berikut ke dalam folder repo:
-https://drive.google.com/file/d/15KMMvbkiCs-B3wsXZBhJA9fLIxwv68eP/view?usp=drive_link
+https://drive.google.com/drive/folders/1prG67Ms5nv39KwF11XKyEZIQ460-OILD?usp=sharing
 
 ## Struktur File
 - `library.py` — fungsi-fungsi preprocessing dan utils (jangan diubah)
