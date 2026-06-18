@@ -216,6 +216,31 @@ def extract_glcm_features(img_gray):
         features.extend([v.mean(), v.max(), v.min(), v.std()])
     return features
 
+def extract_color_features(img_bgr):
+    """
+    Ekstraksi fitur warna berbasis HSV.
+    Output: 6 fitur (mean & std untuk H, S, V)
+    """
+    hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV)
+    features = []
+    for channel in range(3):
+        features.append(hsv[:, :, channel].mean())
+        features.append(hsv[:, :, channel].std())
+    return features
+
+from skimage.feature import local_binary_pattern
+
+def extract_lbp_features(img_gray, P=8, R=1):
+    """
+    Ekstraksi fitur LBP (Local Binary Pattern).
+    Output: histogram LBP yang dinormalisasi (10 fitur untuk uniform LBP)
+    """
+    if len(img_gray.shape) == 3:
+        img_gray = cv2.cvtColor(img_gray, cv2.COLOR_BGR2GRAY)
+    lbp = local_binary_pattern(img_gray, P, R, method='uniform')
+    n_bins = P + 2
+    hist, _ = np.histogram(lbp, bins=n_bins, range=(0, n_bins), density=True)
+    return hist.tolist()
 
 def evaluate_and_save(model, X_test, y_test, le, exp_name, model_name):
     y_pred = model.predict(X_test)
